@@ -2,6 +2,23 @@
 layout: default
 ---
 
+<div class="home-intro">
+  <p>
+    I'm a systems-focused software engineer from Morocco, specializing in
+    <strong>C</strong>, <strong>C++</strong>, and network infrastructure. These days I'm
+    moving that foundation into <strong>cybersecurity</strong> — using it to understand
+    how systems fail, and to build software that holds up.
+  </p>
+
+  <p>
+    More on the [about page]({{ site.baseurl }}/about), the
+    [tools I run](/uses/), or below for writing.
+  </p>
+</div>
+
+<h2 class="section-heading">Writing</h2>
+
+{% if site.posts.size > 0 %}
 <div class="posts">
   {% for post in site.posts %}
     <article class="post">
@@ -16,3 +33,6 @@ layout: default
     </article>
   {% endfor %}
 </div>
+{% else %}
+<p class="no-posts">Nothing published yet. Check back soon.</p>
+{% endif %}

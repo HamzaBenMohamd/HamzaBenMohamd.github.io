@@ -1,0 +1,28 @@
+<button id="theme-toggle" class="theme-toggle" type="button" aria-live="polite">Theme</button>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var button = document.getElementById('theme-toggle');
+
+    function resolved() {
+      var explicit = root.getAttribute('data-theme');
+      if (explicit) { return explicit; }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function render() {
+      button.textContent = resolved() === 'dark' ? 'Light mode' : 'Dark mode';
+      button.setAttribute('aria-label', 'Switch to ' + (resolved() === 'dark' ? 'light' : 'dark') + ' mode');
+    }
+
+    render();
+
+    button.addEventListener('click', function () {
+      var next = resolved() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      render();
+    });
+  })();
+</script>

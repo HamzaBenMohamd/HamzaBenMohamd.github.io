@@ -5,6 +5,15 @@
 
     {% include meta.html %}
 
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored) { document.documentElement.setAttribute('data-theme', stored); }
+        } catch (e) {}
+      })();
+    </script>
+
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -19,7 +28,7 @@
     <div class="wrapper-masthead">
       <div class="container">
         <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" alt="{{ site.name }}" /></a>
 
           <div class="site-info">
             <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
@@ -27,8 +36,9 @@
           </div>
 
           <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
+            <a href="{{ site.baseurl }}/">Home</a>
             <a href="{{ site.baseurl }}/about">About</a>
+            <a href="{{ site.baseurl }}/uses">Uses</a>
           </nav>
         </header>
       </div>
@@ -41,6 +51,7 @@
     <div class="wrapper-footer">
       <div class="container">
         <footer class="footer">
+          {% include theme.html %}
           {% include svg-icons.html %}
         </footer>
       </div>
@@ -49,3 +60,4 @@
     {% include analytics.html %}
   </body>
 </html>
+

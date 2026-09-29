@@ -25,3 +25,62 @@ $georgia: Georgia, serif;
     @content;
   }
 }
+
+/********************/
+/* THEMING (custom properties) */
+/********************/
+
+// Light palette, mapped onto the original theme colors so the site looks unchanged.
+:root {
+  --bg: #{$white};
+  --text: #{$darkGray};
+  --text-strong: #{$darkerGray};
+  --text-muted: #{$gray};
+  --link: #{$blue};
+  --border: #ddd;
+  --border-soft: #{$lightGray};
+  --panel: #{$lightGray};
+  --code-bg: #efefef;
+  --code-border: #ddd;
+  --code-shadow: rgba(0, 0, 0, 0.1);
+  --selection-bg: #{$lightGray};
+  --selection-text: #{$black};
+  --code-default: #93A1A1;
+  --code-muted: #555;
+}
+
+// Dark palette. A desaturated terminal-ish scheme, not pure black, so it stays readable.
+@mixin dark-palette {
+  --bg: #14161a;
+  --text: #d6d9de;
+  --text-strong: #f0f2f5;
+  --text-muted: #98a0ad;
+  --link: #6fb3f2;
+  --border: #2c313a;
+  --border-soft: #262b33;
+  --panel: #1b1e24;
+  --code-bg: #1e222a;
+  --code-border: #2c313a;
+  --code-shadow: rgba(0, 0, 0, 0.4);
+  --selection-bg: #2f4f76;
+  --selection-text: #ffffff;
+  --code-default: #a8b3bd;
+  --code-muted: #7d8794;
+}
+
+// Explicit user choice always wins.
+:root[data-theme='dark'] {
+  @include dark-palette;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+// Otherwise follow the OS preference.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include dark-palette;
+    color-scheme: dark;
+  }
+}
